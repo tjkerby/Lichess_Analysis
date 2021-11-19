@@ -1,0 +1,11 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+
+MISC
+explanations.txt
+^data-raw$
+
+^.*\.o$
+^.*\.so$
+^.*\.dll$
+^cran-comments\.md$
