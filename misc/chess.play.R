@@ -1,21 +1,33 @@
 library(rchess)
 
 setwd("C:/Users/kelvy/OneDrive/KelvynsFiles/Masters Program/Stat Comp/ChessProject")
-games <- read.csv("games.csv", header = T)
+
+games <- read.csv("misc/games.csv", header = T)
 games$moves[4]
 v <- strsplit(games$moves, split = " ")
 v
-v[[1]]
-v[[1]][13] == "O-O"
+v[[4]]
+v[[4]][13] == "O-O"
 
 chss <- Chess$new()
 paste0("chss",
        "$move(", m, ")")
 s <- eval(parse(text = "2+3"))
-e4 <- "e4"
-s <- eval(parse(text = paste0("chss", "$move(", "e4", ")")))
+k <- "d4"
+s <- eval(parse(text = paste0("chss", "$move(", d4, ")")))
 s
 
+v[[1]]
+
+seq_len(v[[1]])
+
+chss <- Chess$new()
+l <- length(v[[1]])
+for(i in seq_len(l)){
+  s <- eval(parse(text = paste0("chss", "$move(\"", v[[1]][i], "\")")))
+  print(plot(chss))
+  Sys.sleep(time = 0.5)
+}
 
 
 #detach("package:rchess", unload = T)
