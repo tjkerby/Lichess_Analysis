@@ -1,10 +1,12 @@
+##### Load Libraries #####
 library(rchess)
 library(svMisc)
+library(hash)
+library(rlist)
 
+##### Load Data #####
 games <- read.csv("misc/games.csv", header = T)
 split_games <- strsplit(games$moves, split = " ")
-split_games <- split_games[1:8250]
-# split_games <- split_games[-8251]
 
 load_data <- function(split_games, num_games = length(split_games), estimator = 100) {
   games <- vector("list", length = num_games)
@@ -16,10 +18,12 @@ load_data <- function(split_games, num_games = length(split_games), estimator = 
       new_str <- paste0("$move(\"", split_games[[i]][j],"\")")
       moves_command <- paste0(moves_command, new_str)
     }
-    s <- eval(parse(text = moves_command))
-    pgn_data <- s$pgn()
-    hist <- s$history(verbose = T)
-    games[[i]] <- c(pgn_data, hist)
+    tryCatch({
+      s <- eval(parse(text = moves_command))
+      pgn_data <- s$pgn()
+      hist <- s$history(verbose = T)
+      games[[i]] <- c(pgn_data, hist)
+    }, error=function(e){cat("ERROR :",conditionMessage(e), "\n")})
     progress(i, num_games)
     if (i == round(num_games/estimator)) {
       timer = Sys.time()
@@ -33,44 +37,97 @@ load_data <- function(split_games, num_games = length(split_games), estimator = 
   return(games)
 }
 
-
 loaded_data <- load_data(split_games)
 
-save(loaded_data, file = "loaded_data.Rdata")
+### Figure out where games are failing ###
+indexes <- sapply(X=loaded_data, FUN = is.null)
+sum(indexes) # The number of missing observations
+filtered_data <- list.remove(loaded_data, indexes)
+sum(sapply(X=filtered_data, FUN = is.null))
 
+save(filtered_data, file = "filtered_data.Rdata")
+
+##### Where is the King Checkmated? #####
+### Did the game end in checkmate? ###
+checkmate <- function(game) {
+  grepl("#", game$san[length(game$san)], fixed = T)
+}
+
+### Get position of the king at the end of the game ###
+king_pos <- function(game) {
+  for (i in length(game$san):1) {
+    if (game$piece[i] == "k") {
+      return(game$to[i])
+    }
+  }
+  if (game$color[length(game$san)] == "b") {
+    return("e1")
+  } else {
+    return("e8")
+  }
+}
+
+### Store a board to count where the king is when checkmated ###
+initialize_board <- function() {
+  board <- hash()
+  board_ind <- hash()
+  board_rows <- c("a", "b", "c", "d", "e", "f", "g", "h")
+  board_cols <- c("1", "2", "3", "4", "5", "6", "7", "8")
+  i <- 1
+  for (letter in board_rows) {
+    j <- 1
+    for (number in board_cols) {
+      board[[paste(letter, number, sep = "")]] <- 0
+      board_ind [[paste(letter, number, sep = "")]] <- c(i, j)
+      j <- j + 1
+    }
+    i <- i + 1
+  }
+  return(board)
+}
+
+
+##### Run on data #####
+for (i in 1:length(filtered_data)) {
+  if (checkmate(filtered_data[[i]])) {
+    k_pos <- king_pos(filtered_data[[i]])
+    board[[k_pos]] <- board[[k_pos]] + 1
+  }
+}
+
+##### Plot count data #####
+df <- data.frame(matrix(ncol = 3, nrow = 0))
+for (i in keys(board)) {
+  idx <- board_ind[[i]]
+  df <- rbind(df, c(idx[1], idx[2], board[[i]]))
+}
+colnames(df) <- c("X", "Y", "CHECKMATE")
+library(ggplot2)
+ggplot(df, aes(X, Y)) + geom_tile(aes(fill = CHECKMATE)) + scale_fill_gradient(low = "white", high = "red")
+
+##### Look when the king is checked #####
+get_check_index <- function(game) {
+  game[[1]] <- gsub("\n", " ", game[[1]])
+  moves <- strsplit(game[[1]], " ")
+  moves <- moves[[1]]
+  check_indexes <- c()
+  offset <- 0
+  for (i in 1:length(moves)) {
+    if (grepl(".", moves[i], fixed=T) == F) {
+      if (grepl("+", moves[i], fixed=T)) {
+        check_indexes <- c(check_indexes, i-offset)
+        print(moves[i])
+      }
+    } else {
+      offset <- offset + 1
+    }
+  }
+  return(check_indexes)
+}
+
+##### Example of recreating an rchess object from a pgn #####
 a <- loaded_data[[1]][[1]]
 chss <- Chess$new()
 chss$load_pgn(a)
 chss$history(verbose=T)
 
-
-
-
-
-
-
-game_1 <- loaded_data[[2]]
-game_1$ascii() # prints the board
-game_1$get('a1') # gets the piece in the position
-game_1$game_over()
-game_1$summary()
-game_1$history_detail()
-a <- game_1$history(verbose = T)
-class(a)
-
-game_1$moves(verbose = T)
-
-a <- game_1$fen()
-
-chss <- Chess$new()
-chss$load(a)
-# usethis::use_data(loaded_data, overwrite = TRUE)
-
-chss <- Chess$new()
-chss$move("e4")$move("d6")$move("Bc4")$move("f5")$move("exf5")$move("Nf6")$move("d3")$move("d5")$move("Bb3")$move("Bxf5")$move("Nf3")$move("Nc6")$move("Ng5")$move("h6")$move("Nf3")$move("g5")$move("O-O")$move("d4")$move("c3")$move("e5")$move("cxd4")$move("exd4")
-chss$plot()
-a <- chss$history(verbose = T)
-tail(a)
-chss$move("Re1+")
-
-split_games[[8251]]
