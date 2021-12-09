@@ -20,9 +20,25 @@ plot_game <- function(game_num = 1, delay = 0.5){
 
   for(i in seq_len(l)){
     s <- eval(parse(text = paste0("chss", "$move(\"", v[[1]][i], "\")")))
+    #par(mar = c(0,0,0,0))
+    #layout(matrix(c(1, 1, 1, 2, 1, 1, 1, 3), nrow = 2, byrow = TRUE))
     print(plot(chss))
     Sys.sleep(time = delay)
   }
 }
 
-plot_game(game_num = 1, delay = 0.5)
+plot_game(game_num = 8258, delay = 0.5)
+games$moves[8258]
+nrow(games)
+
+chss <- Chess$new()
+par(mar = c(0,0,0,0))
+par(mfrow = c(1, 2))
+layout(matrix(c(1, 1, 1, 2,
+                1, 1, 1, 3), nrow = 2, byrow = TRUE))
+p <- plot(chss)
+p
+plot(hist(iris$Sepal.Length))
+plot(hist(iris$Sepal.Length))
+
+image(p)
