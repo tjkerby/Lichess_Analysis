@@ -37,15 +37,17 @@ load_data <- function(split_games, num_games = length(split_games), estimator = 
   return(games)
 }
 
-loaded_data <- load_data(split_games)
+# loaded_data <- load_data(split_games)
 
 ### Figure out where games are failing ###
-indexes <- sapply(X=loaded_data, FUN = is.null)
-sum(indexes) # The number of missing observations
-filtered_data <- list.remove(loaded_data, indexes)
-sum(sapply(X=filtered_data, FUN = is.null))
+# indexes <- sapply(X=loaded_data, FUN = is.null)
+# sum(indexes) # The number of missing observations
+# filtered_data <- list.remove(loaded_data, indexes)
+# sum(sapply(X=filtered_data, FUN = is.null))
+#
+# save(filtered_data, file = "filtered_data.Rdata")
 
-save(filtered_data, file = "filtered_data.Rdata")
+load("filtered_data.Rdata")
 
 ##### Where is the King Checkmated? #####
 ### Did the game end in checkmate? ###
@@ -83,11 +85,15 @@ initialize_board <- function() {
     }
     i <- i + 1
   }
-  return(board)
+  return(list('board' = board, 'board_ind' = board_ind))
 }
 
 
 ##### Run on data #####
+board_obj <- initialize_board()
+board <- board_obj$board
+board_ind <- board_obj$board_ind
+
 for (i in 1:length(filtered_data)) {
   if (checkmate(filtered_data[[i]])) {
     k_pos <- king_pos(filtered_data[[i]])
