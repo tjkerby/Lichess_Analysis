@@ -1,27 +1,26 @@
 
 library(ggplot2)
-ggplot(data = score, aes(x = move, y = diff, group = 1)) + geom_line() +
-  geom_smooth()
+load("data-raw/filtered_data.Rdata")
+games1 <- filtered_data
 
-game_num = 8
 plot_score <- function(game_num = 1){
-  tryCatch({
-
-
-
-  v <- strsplit(games[game_num, ]$moves, split = " ")
+  g <- games1[[game_num]][[1]]
   chss <- Chess$new()
-  l <- length(v[[1]])
+  chss$load_pgn(g)
+  ch <- chss$history(verbose = T)
+  v <- ch$san
+  chss <- Chess$new()
+  l <- length(v)
 
   for(i in seq_len(l)){
-    s <- eval(parse(text = paste0("chss", "$move(\"", v[[1]][i], "\")")))
+    s <- eval(parse(text = paste0("chss", "$move(\"", v[i], "\")")))
   }
 
   score <- data.frame(move = seq_len(l), white = 39, black = 39)
   score$diff <-  score$white - score$black
 
 
-  check <- grep("x", v[[1]])
+  check <- grep("x", v)
 
   if(length(check) == 0){
     df <- score
@@ -59,22 +58,21 @@ plot_score <- function(game_num = 1){
     df$diff <- df$white - df$black
   }
 
-  ggplot(data = df, aes(x = move, y = diff, group = 1)) + geom_line() +
-    geom_abline(intercept = 0, slope = 0) +
-    ylim(-max(abs(df$diff)), max(abs(df$diff))) +
-    ylab("Black Lead          White Lead")
-
-
-  }, error = function(e){cat("ERROR: ", conditionMessage(e), "\n")})
+  if(max(abs(df$diff)) == 0){
+    ggplot(data = df, aes(x = move, y = diff, group = 1)) + geom_line() +
+      geom_abline(intercept = 0, slope = 0) +
+      ylim(-1, 1) +
+      ylab("Black Lead          White Lead")
+  }
+  else{
+    ggplot(data = df, aes(x = move, y = diff, group = 1)) + geom_line() +
+      geom_abline(intercept = 0, slope = 0) +
+      ylim(-max(abs(df$diff)), max(abs(df$diff))) +
+      ylab("Black Lead          White Lead")
+  }
 }
 
 plot_score(8)
 plot_score(9)
 plot_score(100)
 plot_score(8251)
-
-Z <- vector()
-for(i in 8251:8260){
-  print(i)
-  z[i-8250] <- plot_score(i)
-}
