@@ -6,18 +6,19 @@
 #' @param game_num The row number of the game dataset for plotting.
 #' @param delay The time in seconds between each plot of a new chess move.
 #' @return A sequence of chess moves characterizing the desired game.
+#' @import rchess
 #' @examples
 #' plot_game(game_num = 1, delay = 0)
 #' @export
 
 
-library(rchess)
-games <- read.csv("misc/games.csv", header = T)
-load("data-raw/filtered_data.Rdata")
-games1 <- filtered_data
+# library(rchess)
+# games <- read.csv("misc/games.csv", header = T)
+# load("data-raw/filtered_data.Rdata")
+# games1 <- filtered_data
 
 plot_game <- function(game_num = 1, delay = 0.5){
-  g <- games1[[game_num]][[1]]
+  g <- chess.analytics::games_clean[[game_num]][[1]]
   chss <- Chess$new()
   chss$load_pgn(g)
   ch <- chss$history(verbose = T)

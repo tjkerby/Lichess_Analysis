@@ -3,6 +3,9 @@
 \name{plot_game}
 \alias{plot_game}
 \title{Plot Chess Game}
+\usage{
+plot_game(game_num = 1, delay = 0.5)
+}
 \arguments{
 \item{game_num}{The row number of the game dataset for plotting.}
 
