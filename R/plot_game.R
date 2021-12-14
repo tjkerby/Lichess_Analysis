@@ -11,13 +11,7 @@
 #' plot_game(game_num = 1, delay = 0)
 #' @export
 
-
-# library(rchess)
-# games <- read.csv("misc/games.csv", header = T)
-# load("data-raw/filtered_data.Rdata")
-# games1 <- filtered_data
-
-plot_game <- function(game_num = 1, delay = 0.5){
+plot_game <- function(game_num = 1, delay = 0.5) {
   g <- chess.analytics::games_clean[[game_num]][[1]]
   chss <- Chess$new()
   chss$load_pgn(g)
@@ -27,8 +21,8 @@ plot_game <- function(game_num = 1, delay = 0.5){
 
   l <- length(v)
 
-  for(i in seq_len(l)){
-    s <- eval(parse(text = paste0("chss", "$move(\"", v[i], "\")")))
+  for (i in seq_len(l)) {
+    eval(parse(text = paste0("chss", "$move(\"", v[i], "\")")))
     print(plot(chss))
     Sys.sleep(time = delay)
   }

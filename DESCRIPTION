@@ -16,7 +16,8 @@ RoxygenNote: 7.1.2
 Depends: 
     R (>= 2.10)
 Imports:
-    rchess
+    rchess,
+    ggplot2
 Suggests: 
     rmarkdown,
     knitr
