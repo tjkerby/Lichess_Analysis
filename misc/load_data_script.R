@@ -55,7 +55,7 @@ sum(sapply(X=filtered_data, FUN = is.null))
 
 load("filtered_data.Rdata")
 
-##### FUNCTIONS FOR PIECES #####
+##### HELPER FUNCTIONS FOR PIECES #####
 ### KING ###
 checkmate <- function(game, color = "W") {
   if (grepl("#", game$san[length(game$san)], fixed = T)) {

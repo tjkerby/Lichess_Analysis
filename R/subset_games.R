@@ -1,15 +1,6 @@
 
-
-gc <- chess.analytics::games_clean
-
-load("data-raw/filtered_data.Rdata")
-filtered_data[[3]]
-
-g <- chess.analytics::games
-summary(g$victory_status)
-g$rated
-library(dplyr)
-wt <- g %>% filter(rated == "TRUE", winner == "white", white_rating >= 1500)
+##### part of the reason the package won't load is because of this code
+##### isn't in the function portion.
 
 subset_games <- function(data = filtered_data, rated = "all", winner = "all",
                          white_rating = c(0, 3000), black_rating = c(0, 3000),
@@ -37,18 +28,22 @@ subset_games <- function(data = filtered_data, rated = "all", winner = "all",
   new_data
 }
 
-newlist <- subset_games(filtered_data, rated = "TRUE", winner = "white",
-                        white_rating = c(1500, 3000),
-                        black_rating = c(1500, 3000))
 
-save(newlist, file = "misc/subset_data.Rdata")
 
-library(dplyr)
-g <- chess.analytics::games
-wt <- g %>% filter(rated == "TRUE",
-                   winner == "white",
-                   white_rating >= 1500,
-                   black_rating >= 1500)
-
-newlist[[1]]$winner
-
+# gc <- chess.analytics::games_clean
+# load("data-raw/filtered_data.Rdata")
+# newlist <- subset_games(filtered_data, rated = "TRUE", winner = "white",
+#                         white_rating = c(1500, 3000),
+#                         black_rating = c(1500, 3000))
+#
+# save(newlist, file = "misc/subset_data.Rdata")
+#
+# library(dplyr)
+# g <- chess.analytics::games
+# wt <- g %>% filter(rated == "TRUE",
+#                    winner == "white",
+#                    white_rating >= 1500,
+#                    black_rating >= 1500)
+#
+# newlist[[1]]$winner
+#
