@@ -12,6 +12,7 @@ Description: This packages provides the user with a set of tools and functions
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
+LazyDataCompression: bzip2
 RoxygenNote: 7.1.2
 Depends: 
     R (>= 2.10)
