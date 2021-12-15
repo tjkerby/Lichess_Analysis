@@ -38,13 +38,17 @@ subset_games <- function(data = filtered_data, rated = "all", winner = "all",
 }
 
 newlist <- subset_games(filtered_data, rated = "TRUE", winner = "white",
-                        white_rating = c(1500, 3000))
+                        white_rating = c(1500, 3000),
+                        black_rating = c(1500, 3000))
+
+save(newlist, file = "misc/subset_data.Rdata")
 
 library(dplyr)
 g <- chess.analytics::games
 wt <- g %>% filter(rated == "TRUE",
                    winner == "white",
-                   white_rating >= 1500)
+                   white_rating >= 1500,
+                   black_rating >= 1500)
 
 newlist[[1]]$winner
 
