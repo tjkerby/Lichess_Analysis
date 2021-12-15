@@ -16,5 +16,5 @@ and 'B' for black.}
 A boolean logic of TRUE or FALSE
 }
 \description{
-This function helps to find the games that involved a checkmate of the
+This function helps to find the games that ended in a checkmate
 }

@@ -8,13 +8,10 @@ king_pos(game)
 }
 \arguments{
 \item{game}{information about the game}
-
-\item{color}{a string argument that takes a letter of 'W' for White
-and 'B' for black.}
 }
 \value{
 A boolean logic of TRUE or FALSE
 }
 \description{
-This function helps to find the games that involved a checkmate of the
+This function helps to find the kings position
 }

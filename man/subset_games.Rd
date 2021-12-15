@@ -44,8 +44,5 @@ Takes a chess dataset stored as a list object and feature values
   list, but missing any observations that fail the given conditions.
 }
 \examples{
-newlist <- subset_games(filtered_data, rated = "TRUE", winner = "white",
-                        white_rating = c(2300, 3000),
-                        black_rating = c(2300, 3000))
-newlist
+print("FIXME")
 }
