@@ -59,7 +59,7 @@ load("filtered_data.Rdata")
 ### KING ###
 checkmate <- function(game, color = "W") {
   if (grepl("#", game$san[length(game$san)], fixed = T)) {
-    if (game$color[length(game$san)] == color) {
+    if (game$color[length(game$san) - 1] == color) {
       return(TRUE)
     }
   }
@@ -153,8 +153,8 @@ piece_pos <- function(game, piece = 'r', color = "w", position = 'l') {
 
 ### Store a board to count where the king is when checkmated ###
 initialize_board_pauper <- function() {
-  board <- hash()
-  board_ind <- hash()
+  board <- hash::hash()
+  board_ind <- hash::hash()
   board_rows <- c("a", "b", "c", "d", "e", "f", "g", "h")
   board_cols <- c("1", "2", "3", "4", "5", "6", "7", "8")
   i <- 1
@@ -171,8 +171,8 @@ initialize_board_pauper <- function() {
 }
 
 initialize_board_royal <- function() {
-  board <- hash()
-  board_ind <- hash()
+  board <- hash::hash()
+  board_ind <- hash::hash()
   board_rows <- c("a", "b", "c", "d", "e", "f", "g", "h")
   board_cols <- c("1", "2", "3", "4", "5", "6", "7", "8")
   i <- 1
@@ -188,9 +188,10 @@ initialize_board_royal <- function() {
   return(list('board' = board, 'board_ind' = board_ind))
 }
 
-plot_event <- function(data, event, color = 'w', position = 'l', transformation = 'none') {
+plot_event <- function(data, event, color = 'w', position = 'l',
+                       transformation = 'none') {
   # Initialize a blank board
-  board_obj <- initialize_board_royal()
+  board_obj <- initialize_board_pauper()
   board <- board_obj$board
   board_ind <- board_obj$board_ind
 
@@ -203,9 +204,9 @@ plot_event <- function(data, event, color = 'w', position = 'l', transformation 
       }
     }
   } else {
-    board_obj <- initialize_board_pauper()
-    board <- board_obj$board
-    board_ind <- board_obj$board_ind
+    # board_obj <- initialize_board_pauper()
+    # board <- board_obj$board
+    # board_ind <- board_obj$board_ind
     for (i in 1:length(data)) {
       if (piece_death(data[[i]]$history, piece = event, color = color, position = position) ) {
         piece_pos <- piece_pos(data[[i]]$history, piece = event, color = color, position = position)
@@ -235,7 +236,7 @@ plot_event <- function(data, event, color = 'w', position = 'l', transformation 
   ggplot(df, aes(X, Y)) + geom_tile(aes(fill = event)) + scale_fill_gradient(low = "white", high = "red")
 }
 
-plot_event(filtered_data, "n", 'w', 'l', 'sqrt')
+plot_event(newlist, "q", 'w')
 
 ##### Example of recreating an rchess object from a pgn #####
 a <- loaded_data[[1]][[1]]
