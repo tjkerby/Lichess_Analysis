@@ -21,15 +21,11 @@ library(chess.analytics)
 ```
 
 
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
+In this tutorial, we are going to showcase some of the functions that this package provides. Chess is a well known game that has been around for centuries. Chess involves two teams, White and Black. Each player has a King, Queen, two bishops, two knights, two rooks, and 8 pawns.  The objective is to have one a piece attacking the opposing team's king and they have not options to move the king out of an attack or defend with any of their other pieces. 
 
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
+## Background Information and goals
 
-## Vignette Info
-
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
+The goal of this package is to take information from the Kaggle Lichess dataset. This package takes their csv of all the data and stores the data in a different data structure.  This allows the user to put in a game number and have access to functions such as: plotting a chess game, visualizing the game score, and creating a heatmap on where a certain piece dies.
 
 ## Styles
 
@@ -41,7 +37,7 @@ The `html_vignette` template includes a basic CSS theme. To override this theme 
 
 ## Figures
 
-The figure sizes have been customised so that you can easily put two images side-by-side. 
+The figure sizes have been customized so that you can easily put two images side-by-side. 
 
 ```{r, warning=FALSE}
 # p1 <- function(x, knitr = FALSE){
@@ -49,7 +45,9 @@ The figure sizes have been customised so that you can easily put two images side
 #   if(!knitr) dev.new()
 #   plot(x^2)
 # }
-chess.analytics::plot_game(1, .1)
+# chess.analytics::plot_game(1, .1)
+plot(1:10)
+plot(10:1)
 ```
 
 You can enable figure captions by `fig_caption: yes` in YAML:
