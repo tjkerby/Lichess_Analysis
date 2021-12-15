@@ -1,6 +1,30 @@
-
-##### part of the reason the package won't load is because of this code
-##### isn't in the function portion.
+#' Subset Chess Data
+#' @name subset_games
+#' @description Takes a chess dataset stored as a list object and feature values
+#'   to subset on. This then performs operations on that list comparable to
+#'   baseR's subset command for dataframes. The result is the original chess
+#'   list, but missing any observations that fail the given conditions.
+#'
+#' @param data A chess dataset stored as a list object.
+#' @param rated A chess subset feature indicating whether a game impacted
+#'   player ratings. Possible values are "all", "TRUE", or "FALSE".
+#' @param winner A chess subset feature indicating which player won the game.
+#'   Possible values are "all", "white", "black" or "draw".
+#' @param white_rating A chess subset feature indicating the range of rating
+#'   scores for the white player. It should be a vector of a lower bound and
+#'   upper bound of ratings. For example: c(1500, 2000).
+#' @param black_rating A chess subset feature indicating the range of rating
+#'   scores for the black player. It should be a vector of a lower bound and
+#'   upper bound of ratings. For example: c(1500, 2000).
+#' @param victory_type A chess subset feature indicating how the game ended.
+#'   Possible values are "all", "outoftime", "resign", "mate", or "draw".
+#'
+#' @return A chess dataset list with games meeting each of the specified
+#'   conditions.
+#'
+#' @examples
+#' print("FIXME")
+#' @export
 
 subset_games <- function(data = filtered_data, rated = "all", winner = "all",
                          white_rating = c(0, 3000), black_rating = c(0, 3000),
@@ -29,7 +53,7 @@ subset_games <- function(data = filtered_data, rated = "all", winner = "all",
 }
 
 
-
+# filtered_data[[4]]$victory_type
 # gc <- chess.analytics::games_clean
 # load("data-raw/filtered_data.Rdata")
 # newlist <- subset_games(filtered_data, rated = "TRUE", winner = "white",
@@ -40,10 +64,11 @@ subset_games <- function(data = filtered_data, rated = "all", winner = "all",
 #
 # library(dplyr)
 # g <- chess.analytics::games
+# unique(g$victory_status)
 # wt <- g %>% filter(rated == "TRUE",
 #                    winner == "white",
 #                    white_rating >= 1500,
 #                    black_rating >= 1500)
 #
-# newlist[[1]]$winner
-#
+# newlist[[1]]$victory_type
+
