@@ -65,8 +65,6 @@ subset_games <- function(data = filtered_data, rated = "all", winner = "all",
 #
 # save(newlist, file = "misc/subset_data.Rdata")
 #
-# library(dplyr)
-# g <- chess.analytics::games
 # unique(g$victory_status)
 # wt <- g %>% filter(rated == "TRUE",
 #                    winner == "white",
