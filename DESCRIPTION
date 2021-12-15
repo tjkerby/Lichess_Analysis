@@ -17,7 +17,11 @@ Depends:
     R (>= 2.10)
 Imports:
     rchess,
-    ggplot2
+    ggplot2,
+    hash,
+    manipulateWidget,
+    rlist,
+    svMisc
 Suggests: 
     rmarkdown,
     knitr

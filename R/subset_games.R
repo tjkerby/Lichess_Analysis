@@ -23,10 +23,7 @@
 #'   conditions.
 #'
 #' @examples
-#' newlist <- subset_games(filtered_data, rated = "TRUE", winner = "white",
-#'                         white_rating = c(2300, 3000),
-#'                         black_rating = c(2300, 3000))
-#' newlist
+#' print("FIXME")
 #' @export
 
 subset_games <- function(data = filtered_data, rated = "all", winner = "all",
