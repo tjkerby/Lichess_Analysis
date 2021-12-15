@@ -31,8 +31,11 @@ plot_event <- function(data, event, color = 'w', position = 'l', transformation 
     }
   } else {
     for (i in 1:length(data)) {
-      if (piece_death(data[[i]]$history, piece = event, color = color, position = position) ) {
-        piece_pos <- piece_pos(data[[i]]$history, piece = event, color = color, position = position)
+      if (piece_death(data[[i]]$history, piece = event,
+                      color = color, position = position) ) {
+        piece_pos <- piece_pos(data[[i]]$history,
+                               piece = event, color = color,
+                               position = position)
         board[[piece_pos]] <- board[[piece_pos]] + 1
       }
     }
@@ -40,7 +43,7 @@ plot_event <- function(data, event, color = 'w', position = 'l', transformation 
 
   # Prep the data for plotting
   df <- data.frame(matrix(ncol = 3, nrow = 0))
-  for (i in keys(board)) {
+  for (i in hash::keys(board)) {
     idx <- board_ind[[i]]
     value <- board[[i]]
     if (transformation == 'none') {
@@ -56,5 +59,7 @@ plot_event <- function(data, event, color = 'w', position = 'l', transformation 
 
 
   # Plot the data
-  ggplot(df, aes(X, Y)) + geom_tile(aes(fill = event)) + scale_fill_gradient(low = "white", high = "red")
+  ggplot(df, aes(X, Y)) +
+    geom_tile(aes(fill = event)) +
+    scale_fill_gradient(low = "white", high = "red")
 }
