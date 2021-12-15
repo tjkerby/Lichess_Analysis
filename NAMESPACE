@@ -3,6 +3,7 @@
 export(plot_game)
 export(plot_game_score)
 export(plot_score)
+export(subset_games)
 import(ggplot2)
 import(manipulateWidget)
 import(rchess)
