@@ -1,14 +1,12 @@
 #### HELPER FUNCTIONS #####
 #' Checkmate
 #'
-#' This function helps to find the games that involved a checkmate of the
+#' This function helps to find the games that ended in a checkmate
 #'
 #' @param game information about the game
 #' @param color a string argument that takes a letter of 'W' for White
 #'    and 'B' for black.
 #' @return A boolean logic of TRUE or FALSE
-#'
-#' @import rchess
 
 ### KING ###
 checkmate <- function(game, color = "W") {
@@ -22,15 +20,12 @@ checkmate <- function(game, color = "W") {
 
 #' King Position
 #'
-#' This function helps to find the games that involved a checkmate of the
+#' This function helps to find the kings position
 #'
 #' @param game information about the game
-#' @param color a string argument that takes a letter of 'W' for White
-#'    and 'B' for black.
+#'
 #' @return A boolean logic of TRUE or FALSE
 #'
-#' @import rchess
-
 king_pos <- function(game) {
   for (i in length(game$san):1) {
     if (game$piece[i] == "k") {
@@ -45,19 +40,19 @@ king_pos <- function(game) {
 }
 
 ### Other pieces ###
-#' Helper function of
+#' Helper function to find death of a piece in a chess game
 #'
-#' This function helps to find the games that involved a checkmate of the
-#'   and a time delay between moves and generates the sequence of chess moves
-#'   that make up that specific game. Above the game board a scoreboard is
-#'   provided to track the number points each player has as the game progresses.
+#' This function takes the users input of game, piece, color, and position and
+#'   finds where that piece died in a game.
 #'
 #' @param game information about the game
+#' @param piece a lower case character input of one of the following:
+#'   'r' for rook, 'n' for knight, 'b' for bishop.
 #' @param color a string argument that takes a letter of 'W' for White
 #'    and 'B' for black.
-#' @return A boolean logic of TRUE or FALSE
+#' @param position a character of 'l' for left and 'r' for right side
 #'
-#' @import rchess
+#' @return A boolean logic of TRUE or FALSE
 
 piece_death <- function(game, piece = 'r', color = "w", position = 'l') {
   if (length(game) < 9) {
@@ -96,6 +91,20 @@ piece_death <- function(game, piece = 'r', color = "w", position = 'l') {
   return(FALSE)
 }
 
+### Other pieces ###
+#' Helper function to find death of a piece in a chess game
+#'
+#' This function takes the users input of game, piece, color, and position and
+#'   finds where that piece died in a game.
+#'
+#' @param game information about the game
+#' @param piece a lower case character input of one of the following:
+#'   'r' for rook, 'n' for knight, 'b' for bishop.
+#' @param color a string argument that takes a letter of 'W' for White
+#'    and 'B' for black.
+#' @param position a character of 'l' for left and 'r' for right side
+#'
+#' @return A boolean logic of TRUE or FALSE
 piece_pos <- function(game, piece = 'r', color = "w", position = 'l') {
   initial_pos <- NULL
   if (piece == 'r') {
@@ -129,7 +138,14 @@ piece_pos <- function(game, piece = 'r', color = "w", position = 'l') {
   }
 }
 
-
+### Other pieces ###
+#' Helper function to store a board when the king is checkmated
+#'
+#' This function initializes a board and stores information about what locations
+#'   pieces are killed at.
+#'
+#' @return A list with the board and board indices
+#'
 ### Store a board to count where the king is when checkmated ###
 initialize_board <- function() {
   board <- hash()
