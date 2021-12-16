@@ -18,21 +18,87 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(chess.analytics)
-library(qpdf)
+library(ggplot2)
 ```
 
 
-In this tutorial, we are going to showcase some of the functions that this package provides. Chess is a well known game that has been around for centuries. Chess involves two teams, White and Black. Each player has a King, Queen, two bishops, two knights, two rooks, and 8 pawns.  The objective is to have one a piece attacking the opposing team's king and they have not options to move the king out of an attack or defend with any of their other pieces. 
+In this tutorial, we are going to showcase some of the functions that this package provides. Chess is a well known game that has been around for centuries. Chess involves two teams. Each player has a King, Queen, two bishops, two knights, two rooks, and 8 pawns.  The objective is to have one of your pieces attacking the opposing team's king and their king not have any options to move away or defend with any of their other pieces. 
 
 ## Background Information and goals
 
-The goal of this package is to take information from the Kaggle Lichess dataset. This package takes their csv of all the data and stores the data in a different data structure.  This allows the user to put in a game number and have access to functions such as: plotting a chess game, visualizing the game score, and creating a heatmap on where a certain piece dies.
+The goal of this package is to take information from the Kaggle Lichess dataset. This package allows users to take the kaggle csv of roughly 20,000 games, or similar structured data, and store the information in a different data structure.  This allows the user access to function to plot a chess game, visualize the game score, and create a heatmap on where a certain piece dies in the games.
+
+## Figures of how to plot a game_score
+
+The figure sizes were selected because they are easy to visualize and interpret.
+The game below shows that white took a lot of black pieces and beat black in roughly 60 moves. The plot's x-axis is the number of moves and the y-axis is the score difference.  Note that pawns are worth 1 point, knights and bishops are worth 3 points, rooks are worth 5 points, and Queens are worth 9 points.  This plot helps the user visualize roughly what pieces were taken. The x and y axis will be at different scales depending on the games.
+
+```{r fig, fig.height = 2.5, fig.width = 2.5, fig.align = "center", warning=FALSE}
+chess.analytics::plot_score(game_num = 3)
+
+```
+
+## Visualize a game
+
+You can also watch a chess game in action. In order to keep this shorter, we are just going to include the last move of the game.
+The Following code will run a full game. The picture below is the last move before the white team surrendered.
+
+```{r fig2, fig.height = 3, fig.width = 3, fig.align = "center", warning=TRUE, eval = FALSE}
+chess.analytics::plot_game_score(1)
+```
+
+
+```{r fig3, fig.height = 2, fig.width = 2, fig.align = "center", warning=TRUE, echo=FALSE}
+knitr::include_graphics("C:/Users/Logan/Desktop/GitHub/Lichess_Analysis/vignettes/temp2.png")
+```
 
 
 
-## Figures of how to plot a game and game_score
 
-The figure sizes have been customized so that you can easily put two images side-by-side. 
+## Heatmaps
+
+This package makes use of the different data structure to help a user understand where certain types of pieces were killed.  The user specifies the event (or what piece gets taken), the color, the right or left side, and the transformation applied to the data. Note that the inputs of this function needs to be exact.  This function is fairly simple to use and very effective at displaying areas that typically are where certain pieces are killed.
+
+```{r fig5, fig.height = 3.5, fig.width = 3.5, fig.align = "center", warning=TRUE}
+
+# plot_event(games_clean, "bishop", 'black', 'right-side', raw_counts)
+h <- plot_event(chess.analytics::games_clean , "b", 'b', 'r', 'none')
+h + 
+  ggtitle("Death sites of Right Black Bishop")
+```
+
+Here is another example of the che
+
+```{r fig6, fig.height = 3.5, fig.width = 3.5, fig.align = "center", warning=TRUE}
+
+# plot_event(games_clean, "king", 'white', 'right-side', raw_counts)
+k <- plot_event(chess.analytics::games_clean , "k", 'w', 'r', 'none')
+k + 
+  ggtitle("Checkmates of White King")
+```
+
+## Subsetting the games by certain conditions
+
+We also have created a function that will allow people to subset the games based on certain conditions.  There are multiple types of subsetting that would be interesting to look at and investigate.  We could focus on Ranked games and see where Queens, Rooks, and Knights tend to die. In order to accomplish the heatmaps for those, we need to subset the games to just be those that are following that condition.  Due to the length of run time, we will not run the following code is an example of how to get a subset of the data that could be used in the following analysis.
+
+```{r fig7, warning=TRUE, eval = FALSE}
+
+# this subsets the games to be a subset fo the player ratings between 0-3000
+ranked_games_3000 <- subset_games(data = chess.analytics::games_clean , 
+                                  rated = "all", winner = "all", 
+                                  white_rating = c(0, 3000), 
+                                  black_rating = c(0, 3000),
+                                  victory_type = "all")
+
+```
 
 
+## Further Direction and insight
+
+There is still a lot of work and exploring to be done! We can still look at some summary statistics about openings of rated players and non-rated players.  We can further inspect the death heatmaps to take a condition of certain attackers/pieces.  If you lose a queen to a knight, where do those occurrences tend to happen on the board? We could look into making this package more interactive and possibly look into a shiny app. We can investigate the option to identify and plot what move a certain piece dies and where. 
+
+
+## Conclusions
+
+This package has taken some high level chess jargon and made it easier for the average chess player to understand. This allows the user to start to understand the data and game of chess at a deeper level. We've enjoyed this project and hope you find this package informative and exciting to use! 
 
