@@ -14,6 +14,7 @@
 #' @return A plot of chess scores across moves for the desired game.
 #' @import rchess
 #' @import ggplot2
+#' @importFrom hash keys
 #' @import hash
 #' @import rlist
 #' @import svMisc

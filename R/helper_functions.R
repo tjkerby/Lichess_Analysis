@@ -130,6 +130,8 @@ piece_pos <- function(game, piece = "r", color = "w", position = "l") {
 #' This function initializes a board and stores information about what locations
 #'   pieces are killed at.
 #'
+#' @importFrom hash hash
+#'
 #' @return A list with the board and board indices
 #'
 ### Store a board to count where the king is when checkmated ###
