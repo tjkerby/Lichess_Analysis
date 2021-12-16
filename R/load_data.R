@@ -20,7 +20,7 @@ load_data <- function(split_games, lichess_games,
   start <- Sys.time()
   for (i in 1:num_games) {
     chss <- Chess$new()
-    moves_command <- "chss"
+    moves_command <- ifelse(chss$in_checkmate(), "", "chss")
     l <- length(split_games[[i]])
     for (j in seq_len(l)) {
       new_str <- paste0("$move(\"", split_games[[i]][j], "\")")
