@@ -9,20 +9,25 @@ plot_event(data, event, color = "w", position = "l", transformation = "none")
 \arguments{
 \item{data}{The list of games to look for the event}
 
-\item{event}{The name of the piece that is captured. "k" = checkmate, "q" = queen, "r" = rook, "b" = bishop, "n" = knight}
+\item{event}{The name of the piece that is captured. "k" = checkmate,
+"q" = queen, "r" = rook, "b" = bishop, "n" = knight}
 
-\item{color}{The color of the piece that is captured. "w" = white, "b" = black}
+\item{color}{The color of the piece that is captured. "w" = white,
+"b" = black}
 
-\item{position}{The of the piece when there are two for a color. For instance the left rook. "l" = left, "r" = right}
+\item{position}{The of the piece when there are two for a color. For
+instance the left rook. "l" = left, "r" = right}
 
-\item{transformation}{How should the counts of the heatmap be transformed. "none" = count, "sqrt" = count^.5, "log" = og(count + 1)}
+\item{transformation}{How should the counts of the heatmap be transformed.
+"none" = count, "sqrt" = count^.5, "log" = og(count + 1)}
 }
 \value{
 A plot of chess scores across moves for the desired game.
 }
 \description{
-This function takes a list of games and plots a heatmap of where a specific piece is captured on the board.
+This function takes a list of games and plots a heatmap of
+  where a specific piece is captured on the board.
 }
 \examples{
-print("FIXME")
+plot_event(games_clean, "k", "w", "l")
 }

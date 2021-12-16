@@ -11,6 +11,6 @@ An object of class \code{data.frame} with 20058 rows and 11 columns.
 games
 }
 \description{
-A dataset of the lichess games from kaggle.
+Our original chess games.
 }
 \keyword{datasets}
