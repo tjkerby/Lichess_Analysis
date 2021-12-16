@@ -30,6 +30,3 @@ Takes the data from the lichess dataset on kaggle and converts
   them into rchess objects and then extracts desired information in a
   memory efficient manner
 }
-\examples{
-print("FIXME LATER")
-}
