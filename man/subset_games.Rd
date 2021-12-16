@@ -44,5 +44,12 @@ Takes a chess dataset stored as a list object and feature values
   list, but missing any observations that fail the given conditions.
 }
 \examples{
-print("FIXME")
+\dontrun{
+newlist <- subset_games(games_clean,
+  rated = "TRUE", winner = "white",
+  white_rating = c(1500, 3000),
+  black_rating = c(1500, 3000)
+)
+newlist
+}
 }

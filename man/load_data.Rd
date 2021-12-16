@@ -18,16 +18,18 @@ load_data(
 
 \item{num_games}{the number of games to be processed}
 
-\item{estimator}{the number of iterations used to predict the time until completion.}
+\item{estimator}{the number of iterations used to predict the time until
+completion.}
 }
 \value{
-A list of games where each game is a list that includes the pgn, the history, and
-    other traits for subsetting
+A list of games where each game is a list that includes the pgn,
+  the history, and other traits for subsetting.
 }
 \description{
-Takes the data from the lichess dataset on kaggle and converts them into rchess
-    objects and then extracts desired information in a memory efficient manner
+Takes the data from the lichess dataset on kaggle and converts
+  them into rchess objects and then extracts desired information in a
+  memory efficient manner
 }
 \examples{
-print('FIXME LATER')
+print("FIXME LATER")
 }

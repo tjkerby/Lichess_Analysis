@@ -27,7 +27,8 @@ checkmate <- function(game, color = "W") {
 #' @return A boolean logic of TRUE or FALSE
 #'
 king_pos <- function(game) {
-  for (i in length(game$san):1) {
+  l <- length(game$san)
+  for (i in l:1) {
     if (game$piece[i] == "k") {
       return(game$to[i])
     }
@@ -54,34 +55,27 @@ king_pos <- function(game) {
 #'
 #' @return A boolean logic of TRUE or FALSE
 
-piece_death <- function(game, piece = 'r', color = "w", position = 'l') {
+piece_death <- function(game, piece = "r", color = "w", position = "l") {
   if (length(game) < 9) {
     return(FALSE)
   }
+
   initial_pos <- NULL
-  if (piece == 'r') {
-    if (color == 'w') {
-      if (position == 'l') {initial_pos <- 'a1'} else {initial_pos <- 'h1'}
-    } else {
-      if (position == 'l') {initial_pos <- 'a8'} else {initial_pos <- 'h8'}
-    }
-  } else if (piece == 'b') {
-    if (color == 'w') {
-      if (position == 'l') {initial_pos <- 'c1'} else {initial_pos <- 'f1'}
-    } else {
-      if (position == 'l') {initial_pos <- 'c8'} else {initial_pos <- 'f8'}
-    }
-  } else if (piece == 'n') {
-    if (color == 'w') {
-      if (position == 'l') {initial_pos <- 'b1'} else {initial_pos <- 'g1'}
-    } else {
-      if (position == 'l') {initial_pos <- 'b8'} else {initial_pos <- 'g8'}
-    }
-  } else if (piece == 'q') {
-    if (color == 'w') {initial_pos <- 'd1'} else {initial_pos <- 'd8'}
+  if (piece == "r") {
+    initial_pos <- ifelse(color == "w", ifelse(position == "l", "a1", "h1"),
+                          ifelse(position == "l", "a8", "h8"))
+  } else if (piece == "b") {
+    initial_pos <- ifelse(color == "w", ifelse(position == "l", "c1", "f1"),
+                          ifelse(position == "l", "c8", "f8"))
+  } else if (piece == "n") {
+    initial_pos <- ifelse(color == "w", ifelse(position == "l", "b1", "g1"),
+                          ifelse(position == "l", "b8", "g8"))
+  } else if (piece == "q") {
+    initial_pos <- ifelse(color == "w", "d1", "d8")
   }
   cur_pos <- initial_pos
-  for (i in 1:length(game$san)) {
+  l1 <- length(game$san)
+  for (i in seq_len(l1)) {
     if (game$from[i] == cur_pos) {
       cur_pos <- game$to[i]
     } else if (game$to[i] == cur_pos) {
@@ -105,31 +99,23 @@ piece_death <- function(game, piece = 'r', color = "w", position = 'l') {
 #' @param position a character of 'l' for left and 'r' for right side
 #'
 #' @return A boolean logic of TRUE or FALSE
-piece_pos <- function(game, piece = 'r', color = "w", position = 'l') {
+piece_pos <- function(game, piece = "r", color = "w", position = "l") {
   initial_pos <- NULL
-  if (piece == 'r') {
-    if (color == 'w') {
-      if (position == 'l') {initial_pos <- 'a1'} else {initial_pos <- 'h1'}
-    } else {
-      if (position == 'l') {initial_pos <- 'a8'} else {initial_pos <- 'h8'}
-    }
-  } else if (piece == 'b') {
-    if (color == 'w') {
-      if (position == 'l') {initial_pos <- 'c1'} else {initial_pos <- 'f1'}
-    } else {
-      if (position == 'l') {initial_pos <- 'c8'} else {initial_pos <- 'f8'}
-    }
-  } else if (piece == 'n') {
-    if (color == 'w') {
-      if (position == 'l') {initial_pos <- 'b1'} else {initial_pos <- 'g1'}
-    } else {
-      if (position == 'l') {initial_pos <- 'b8'} else {initial_pos <- 'g8'}
-    }
-  } else if (piece == 'q') {
-    if (color == 'w') {initial_pos <- 'd1'} else {initial_pos <- 'd8'}
+  if (piece == "r") {
+    initial_pos <- ifelse(color == "w", ifelse(position == "l", "a1", "h1"),
+                          ifelse(position == "l", "a8", "h8"))
+  } else if (piece == "b") {
+    initial_pos <- ifelse(color == "w", ifelse(position == "l", "c1", "f1"),
+                          ifelse(position == "l", "c8", "f8"))
+  } else if (piece == "n") {
+    initial_pos <- ifelse(color == "w", ifelse(position == "l", "b1", "g1"),
+                          ifelse(position == "l", "b8", "g8"))
+  } else if (piece == "q") {
+    initial_pos <- ifelse(color == "w", "d1", "d8")
   }
   cur_pos <- initial_pos
-  for (i in 1:length(game$san)) {
+  l1 <- length(game$san)
+  for (i in seq_len(l1)) {
     if (game$from[i] == cur_pos) {
       cur_pos <- game$to[i]
     } else if (game$to[i] == cur_pos) {
@@ -157,10 +143,10 @@ initialize_board <- function() {
     j <- 1
     for (number in board_cols) {
       board[[paste(letter, number, sep = "")]] <- 0
-      board_ind [[paste(letter, number, sep = "")]] <- c(i, j)
+      board_ind[[paste(letter, number, sep = "")]] <- c(i, j)
       j <- j + 1
     }
     i <- i + 1
   }
-  return(list('board' = board, 'board_ind' = board_ind))
+  return(list("board" = board, "board_ind" = board_ind))
 }

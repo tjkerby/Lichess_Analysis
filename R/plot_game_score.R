@@ -69,9 +69,11 @@ plot_game_score <- function(game_num = 1, delay = 0.5) {
 
     for (i in 1:(nrow(df) - 1)) {
       df[i + 1, 2] <- ifelse(df[i + 1, 13] == "White",
-                             df[i, 2] - df[i + 1, 14], df[i, 2])
+        df[i, 2] - df[i + 1, 14], df[i, 2]
+      )
       df[i + 1, 3] <- ifelse(df[i + 1, 13] == "Black",
-                             df[i, 3] - df[i + 1, 14], df[i, 3])
+        df[i, 3] - df[i + 1, 14], df[i, 3]
+      )
     }
   }
 
