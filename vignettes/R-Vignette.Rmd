@@ -2,7 +2,7 @@
 title: "R-Vignette"
 author: "Jelly BeanR"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: rmarkdown::pdf_document
 vignette: >
   %\VignetteIndexEntry{R-Vignette}
   %\VignetteEngine{knitr::rmarkdown}
@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(chess.analytics)
+library(qpdf)
 ```
 
 
@@ -33,15 +34,5 @@ The goal of this package is to take information from the Kaggle Lichess dataset.
 
 The figure sizes have been customized so that you can easily put two images side-by-side. 
 
-```{r, warning=FALSE}
-# p1 <- function(x, knitr = FALSE){
-#   plot(x)
-#   if(!knitr) dev.new()
-#   plot(x^2)
-# }
-# chess.analytics::plot_game(1, .1)
-plot_score()
-
-```
 
 
