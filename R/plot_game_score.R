@@ -9,7 +9,7 @@
 #' @return A sequence of chess moves characterizing the desired game, with a
 #'   scoreboard displayed above it.
 #' @import rchess
-#' @import manipulateWidget
+#' @importFrom manipulateWidget combineWidgets
 #' @examples
 #' plot_game_score(game_num = 1, delay = 0)
 #' @export

@@ -15,8 +15,7 @@
 #' @import rchess
 #' @import ggplot2
 #' @importFrom hash keys
-#' @import rlist
-#' @import svMisc
+#' @importFrom rlist list.remove
 #' @examples
 #' plot_event(games_clean, "k", "w", "l")
 #' @export

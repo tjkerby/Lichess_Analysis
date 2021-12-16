@@ -11,6 +11,7 @@
 #' @return A list of games where each game is a list that includes the pgn,
 #'   the history, and other traits for subsetting.
 #' @import rchess
+#' @importFrom svMisc progress
 load_data <- function(split_games, lichess_games,
                       num_games = length(split_games), estimator = 100) {
   games <- vector("list", length = num_games)
