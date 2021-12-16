@@ -26,7 +26,7 @@ In this tutorial, we are going to showcase some of the functions that this packa
 
 ## Background Information and goals
 
-The goal of this package is to take information from the Kaggle Lichess dataset. This package allows users to take the kaggle csv of roughly 20,000 games, or similar structured data, and store the information in a different data structure.  This allows the user access to function to plot a chess game, visualize the game score, and create a heatmap on where a certain piece dies in the games.
+The goal of this package is to take information from the Kaggle Lichess dataset. This package allows users to take the kaggle csv of roughly 20,000 games, or similar structured data, and store the information in a different data structure.  This allows the user access to functions that plot a chess game, visualize the game score, and create a heatmap where a piece of the users choosing dies in the games put in as input.
 
 ## Figures of how to plot a game_score
 
@@ -49,7 +49,7 @@ chess.analytics::plot_game_score(1)
 
 
 ```{r fig3, fig.height = 2, fig.width = 2, fig.align = "center", warning=TRUE, echo=FALSE}
-knitr::include_graphics("C:/Users/Logan/Desktop/GitHub/Lichess_Analysis/vignettes/temp2.png")
+knitr::include_graphics("temp2.png")
 ```
 
 
@@ -67,7 +67,7 @@ h +
   ggtitle("Death sites of Right Black Bishop")
 ```
 
-Here is another example of the che
+Here is another example of where the white kings are checkmated.
 
 ```{r fig6, fig.height = 3.5, fig.width = 3.5, fig.align = "center", warning=TRUE}
 

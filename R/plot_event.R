@@ -13,7 +13,7 @@
 #'   "none" = count, "sqrt" = count^.5, "log" = log(count + 1)
 #' @return A plot of chess scores across moves for the desired game.
 #' @import rchess
-#' @importFrom ggplot2 ggplot geom_tile scale_fill_gradient
+#' @importFrom ggplot2 ggplot geom_tile scale_fill_gradient aes
 #' @importFrom hash keys
 #' @importFrom rlist list.remove
 #' @examples
