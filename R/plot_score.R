@@ -5,7 +5,7 @@
 #' @param game_num The row number of the game dataset for scoring.
 #' @return A plot of chess scores across moves for the desired game.
 #' @import rchess
-#' @import ggplot2
+#' @importFrom ggplot2 ggplot geom_line geom_abline ylim ylab
 #' @examples
 #' plot_score(game_num = 100)
 #' @export
