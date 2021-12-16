@@ -10,10 +10,10 @@
 #' @param position The of the piece when there are two for a color. For
 #'   instance the left rook. "l" = left, "r" = right
 #' @param transformation How should the counts of the heatmap be transformed.
-#'   "none" = count, "sqrt" = count^.5, "log" = og(count + 1)
+#'   "none" = count, "sqrt" = count^.5, "log" = log(count + 1)
 #' @return A plot of chess scores across moves for the desired game.
 #' @import rchess
-#' @import ggplot2
+#' @importFrom ggplot2 ggplot geom_tile scale_fill_gradient
 #' @importFrom hash keys
 #' @importFrom rlist list.remove
 #' @examples
