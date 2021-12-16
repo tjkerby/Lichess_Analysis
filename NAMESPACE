@@ -6,10 +6,7 @@ export(plot_game_score)
 export(plot_score)
 export(subset_games)
 import(rchess)
-<<<<<<< HEAD
 importFrom(ggplot2,aes)
-=======
->>>>>>> b4c4a87e94e5a1968759d25af360a954a665fcd3
 importFrom(ggplot2,geom_abline)
 importFrom(ggplot2,geom_line)
 importFrom(ggplot2,geom_tile)
