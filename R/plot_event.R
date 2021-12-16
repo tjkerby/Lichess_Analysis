@@ -15,7 +15,6 @@
 #' @import rchess
 #' @import ggplot2
 #' @importFrom hash keys
-#' @import hash
 #' @import rlist
 #' @import svMisc
 #' @examples
