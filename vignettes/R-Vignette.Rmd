@@ -69,8 +69,7 @@ h +
 
 Here is another example of where the white kings are checkmated.
 
-```{r fig6, fig.height = 3.5, fig.width = 3.5, fig.align = "center", warning=TRUE}
-
+```{r fig6, fig.height = 3.5, fig.width = 3.5, fig.align = "center", warning=FALSE}
 # plot_event(games_clean, "king", 'white', 'right-side', raw_counts)
 k <- plot_event(chess.analytics::games_clean , "k", 'w', 'r', 'none')
 k + 
