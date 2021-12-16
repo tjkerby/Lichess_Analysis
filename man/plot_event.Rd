@@ -19,7 +19,7 @@ plot_event(data, event, color = "w", position = "l", transformation = "none")
 instance the left rook. "l" = left, "r" = right}
 
 \item{transformation}{How should the counts of the heatmap be transformed.
-"none" = count, "sqrt" = count^.5, "log" = og(count + 1)}
+"none" = count, "sqrt" = count^.5, "log" = log(count + 1)}
 }
 \value{
 A plot of chess scores across moves for the desired game.
