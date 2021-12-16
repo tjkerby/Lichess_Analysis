@@ -49,7 +49,7 @@ chess.analytics::plot_game_score(1)
 
 
 ```{r fig3, fig.height = 2, fig.width = 2, fig.align = "center", warning=TRUE, echo=FALSE}
-knitr::include_graphics("C:/Users/Logan/Desktop/GitHub/Lichess_Analysis/vignettes/temp2.png")
+knitr::include_graphics("temp2.png")
 ```
 
 
@@ -69,8 +69,7 @@ h +
 
 Here is another example of the che
 
-```{r fig6, fig.height = 3.5, fig.width = 3.5, fig.align = "center", warning=TRUE}
-
+```{r fig6, fig.height = 3.5, fig.width = 3.5, fig.align = "center", warning=FALSE}
 # plot_event(games_clean, "king", 'white', 'right-side', raw_counts)
 k <- plot_event(chess.analytics::games_clean , "k", 'w', 'r', 'none')
 k + 
